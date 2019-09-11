@@ -1,0 +1,118 @@
+
+ui.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+button
+  rotate: false
+  xy: 1008, 1458
+  size: 181, 71
+  orig: 181, 71
+  offset: 0, 0
+  index: -1
+button-metal
+  rotate: false
+  xy: 1, 688
+  size: 313, 95
+  orig: 313, 95
+  offset: 0, 0
+  index: -1
+button-metal-pressed
+  rotate: false
+  xy: 546, 1351
+  size: 313, 95
+  orig: 313, 95
+  offset: 0, 0
+  index: -1
+button-pressed
+  rotate: false
+  xy: 1, 615
+  size: 181, 71
+  orig: 181, 71
+  offset: 0, 0
+  index: -1
+font export
+  rotate: false
+  xy: 1, 1531
+  size: 1659, 452
+  orig: 1659, 452
+  offset: 0, 0
+  index: -1
+font-button
+  rotate: false
+  xy: 1, 785
+  size: 506, 199
+  orig: 506, 199
+  offset: 0, 0
+  index: -1
+menu-bg
+  rotate: false
+  xy: 546, 1213
+  size: 136, 136
+  orig: 136, 136
+  offset: 0, 0
+  index: -1
+panel
+  rotate: false
+  xy: 1, 484
+  size: 129, 129
+  orig: 129, 129
+  offset: 0, 0
+  index: -1
+pig-bg
+  rotate: false
+  xy: 1662, 1551
+  size: 272, 390
+  orig: 272, 390
+  offset: 0, 0
+  index: -1
+slider
+  rotate: false
+  xy: 1662, 1943
+  size: 323, 40
+  orig: 323, 40
+  offset: 0, 0
+  index: -1
+slider-knob
+  rotate: false
+  xy: 1191, 1473
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 316, 714
+  size: 61, 69
+  orig: 61, 69
+  offset: 0, 0
+  index: -1
+star-empty
+  rotate: false
+  xy: 861, 1377
+  size: 61, 69
+  orig: 61, 69
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 546, 1448
+  size: 460, 81
+  orig: 460, 81
+  offset: 0, 0
+  index: -1
+white
+  rotate: false
+  xy: 509, 983
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+window
+  rotate: false
+  xy: 1, 986
+  size: 543, 543
+  orig: 543, 543
+  offset: 0, 0
+  index: -1
