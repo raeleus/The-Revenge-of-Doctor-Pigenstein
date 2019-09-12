@@ -1,0 +1,39 @@
+{
+"skeleton": {
+	"hash": "d6SdPD0VXaUwZtHzZoJ++U0YRq8",
+	"spine": "3.8.72",
+	"y": -389,
+	"width": 474,
+	"height": 390,
+	"images": "../output/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "ground", "bone": "root", "attachment": "ground-mud-left" },
+	{ "name": "bbox", "bone": "root", "attachment": "bbox" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"ground": {
+				"ground": { "x": 237, "y": -194, "width": 474, "height": 390 },
+				"ground-mud-left": { "x": 237, "y": -194, "width": 474, "height": 390 }
+			},
+			"bbox": {
+				"bbox": {
+					"type": "boundingbox",
+					"vertexCount": 6,
+					"vertices": [ -0.01, -388.02, -0.01, 0.1, 47.26, 0.11, 83.46, -23.06, 474.06, -25.96, 474, -388 ]
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {}
+}
+}

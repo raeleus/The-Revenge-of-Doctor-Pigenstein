@@ -4,11 +4,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.crashinvaders.vfx.VfxManager;
+import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.esotericsoftware.spine.utils.TwoColorPolygonBatch;
 import com.ray3k.template.screens.*;
@@ -22,6 +24,13 @@ public class Core extends JamGame {
     public Sound sndClick;
     public ChangeListener sndChangeListener;
     public VfxManager vfxManager;
+    public TextureAtlas textureAtlas;
+    public SkeletonData handSkeletonData;
+    public SkeletonData pigSkeletonData;
+    public SkeletonData platformSkeletonData;
+    public SkeletonData platformMudSkeletonData;
+    public SkeletonData platformMudLeftSkeletonData;
+    public SkeletonData platformMudRightSkeletonData;
     
     @Override
     public void create() {
@@ -56,9 +65,14 @@ public class Core extends JamGame {
     public void loadAssets() {
         assetManager.load("ui/ui.json", Skin.class);
     
-//        assetManager.setLoader(SkeletonData.class, new SkeletonDataLoader(assetManager.getFileHandleResolver()));
-//        SkeletonDataLoader.SkeletonDataLoaderParameter parameter = new SkeletonDataLoader.SkeletonDataLoaderParameter("libgdx-logo/libgdx.atlas");
-//        assetManager.load("libgdx-logo/libgdx.json", SkeletonData.class, parameter);
+        assetManager.setLoader(SkeletonData.class, new SkeletonDataLoader(assetManager.getFileHandleResolver()));
+        SkeletonDataLoader.SkeletonDataLoaderParameter parameter = new SkeletonDataLoader.SkeletonDataLoaderParameter("spine/The Revenge of Doctor Pigenstein.atlas");
+        assetManager.load("spine/hand.json", SkeletonData.class, parameter);
+        assetManager.load("spine/pig.json", SkeletonData.class, parameter);
+        assetManager.load("spine/platform.json", SkeletonData.class, parameter);
+        assetManager.load("spine/platform-mud.json", SkeletonData.class, parameter);
+        assetManager.load("spine/platform-mud-left.json", SkeletonData.class, parameter);
+        assetManager.load("spine/platform-mud-right.json", SkeletonData.class, parameter);
         
         assetManager.load("sfx/click.mp3", Sound.class);
         
@@ -70,6 +84,14 @@ public class Core extends JamGame {
         return new LoadScreen(Actions.run(() -> {
             skin = assetManager.get("ui/ui.json");
             sndClick = assetManager.get("sfx/click.mp3");
+            textureAtlas = assetManager.get("spine/The Revenge of Doctor Pigenstein.atlas");
+            handSkeletonData = assetManager.get("spine/hand.json");
+            pigSkeletonData = assetManager.get("spine/pig.json");
+            platformSkeletonData = assetManager.get("spine/platform.json");
+            platformMudSkeletonData = assetManager.get("spine/platform-mud.json");
+            platformMudLeftSkeletonData = assetManager.get("spine/platform-mud-left.json");
+            platformMudRightSkeletonData = assetManager.get("spine/platform-mud-right.json");
+            
             setScreen(createSplashScreen());
         }));
     }
@@ -85,7 +107,11 @@ public class Core extends JamGame {
     }
     
     private Screen createGameScreen() {
-        return new GameScreen(Actions.run(() -> setScreen(createCreditsScreen())));
+        return new GameScreen(Actions.run(() -> setScreen(createGameOverScreen())));
+    }
+    
+    private Screen createGameOverScreen() {
+        return new GameOverScreen(Actions.run(() -> setScreen(createMenuScreen())));
     }
     
     private Screen createOptionsScreen() {
