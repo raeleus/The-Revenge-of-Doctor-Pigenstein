@@ -163,4 +163,18 @@ public class GameScreen extends JamScreen implements InputProcessor {
     public static boolean isButtonJustPressed(int button) {
         return button == -1 ? buttonsJustPressed.size > 0 : buttonsJustPressed.contains(button);
     }
+    
+    public static boolean isKeyPressed(int key) {
+        return Gdx.input.isKeyPressed(key);
+    }
+    
+    public static boolean isButtonPressed(int button) {
+        if (button == -1) {
+            return Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)
+                    || Gdx.input.isButtonPressed(Input.Buttons.MIDDLE) || Gdx.input.isButtonPressed(Input.Buttons.BACK)
+                    || Gdx.input.isButtonPressed(Input.Buttons.FORWARD);
+        } else {
+            return Gdx.input.isButtonPressed(button);
+        }
+    }
 }
