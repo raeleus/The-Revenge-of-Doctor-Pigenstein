@@ -1,9 +1,11 @@
 package com.ray3k.template;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -31,6 +33,8 @@ public class Core extends JamGame {
     public SkeletonData platformMudSkeletonData;
     public SkeletonData platformMudLeftSkeletonData;
     public SkeletonData platformMudRightSkeletonData;
+    public ParticleEffect mudParticleEffect;
+    public ParticleEffect tossParticleEffect;
     
     @Override
     public void create() {
@@ -73,6 +77,11 @@ public class Core extends JamGame {
         assetManager.load("spine/platform-mud.json", SkeletonData.class, parameter);
         assetManager.load("spine/platform-mud-left.json", SkeletonData.class, parameter);
         assetManager.load("spine/platform-mud-right.json", SkeletonData.class, parameter);
+    
+        ParticleEffectLoader.ParticleEffectParameter particleEffectParameter = new ParticleEffectLoader.ParticleEffectParameter();
+        particleEffectParameter.atlasFile = "spine/The Revenge of Doctor Pigenstein.atlas";
+        assetManager.load("particles/toss.p", ParticleEffect.class, particleEffectParameter);
+        assetManager.load("particles/mud.p", ParticleEffect.class, particleEffectParameter);
         
         assetManager.load("sfx/click.mp3", Sound.class);
         
@@ -85,12 +94,16 @@ public class Core extends JamGame {
             skin = assetManager.get("ui/ui.json");
             sndClick = assetManager.get("sfx/click.mp3");
             textureAtlas = assetManager.get("spine/The Revenge of Doctor Pigenstein.atlas");
+            
             handSkeletonData = assetManager.get("spine/hand.json");
             pigSkeletonData = assetManager.get("spine/pig.json");
             platformSkeletonData = assetManager.get("spine/platform.json");
             platformMudSkeletonData = assetManager.get("spine/platform-mud.json");
             platformMudLeftSkeletonData = assetManager.get("spine/platform-mud-left.json");
             platformMudRightSkeletonData = assetManager.get("spine/platform-mud-right.json");
+            
+            mudParticleEffect = assetManager.get("particles/mud.p");
+            tossParticleEffect = assetManager.get("particles/toss.p");
             
             setScreen(createSplashScreen());
         }));

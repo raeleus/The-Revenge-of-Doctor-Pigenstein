@@ -1,0 +1,58 @@
+{
+"skeleton": {
+	"hash": "spUP/BOxetRY2zeDoxhYBcQ5lZE",
+	"spine": "3.8.72",
+	"x": -12.31,
+	"y": -3.9,
+	"width": 25.08,
+	"height": 29.81,
+	"images": "../output/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "hand-point", "parent": "root", "length": 140.2, "rotation": 132.11, "x": 90.41, "y": -80.07 }
+],
+"slots": [
+	{ "name": "hand-point", "bone": "hand-point", "attachment": "hand-grab" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"hand-point": {
+				"hand-grab": {
+					"x": 128.04,
+					"y": 5.82,
+					"scaleX": 0.2056,
+					"scaleY": 0.2056,
+					"rotation": -132.11,
+					"width": 122,
+					"height": 145
+				},
+				"hand-over": {
+					"x": 125.48,
+					"y": 6.53,
+					"scaleX": 0.2056,
+					"scaleY": 0.2056,
+					"rotation": -132.11,
+					"width": 193,
+					"height": 116
+				},
+				"hand-point": {
+					"x": 125.48,
+					"y": 6.53,
+					"scaleX": 0.2056,
+					"scaleY": 0.2056,
+					"rotation": -132.11,
+					"width": 122,
+					"height": 133
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {}
+}
+}
