@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,13 +19,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ray3k.template.Core;
 import com.ray3k.template.JamScreen;
-import com.ray3k.template.entities.EntityController;
-import com.ray3k.template.entities.ParticleEntity;
+import com.ray3k.template.entities.*;
 
 public class GameScreen extends JamScreen implements InputProcessor {
     private Action action;
     public EntityController entityController;
     public static Viewport gameViewport;
+    public static OrthographicCamera gameCamera;
     public Stage stage;
     private Skin skin;
     private Core core;
@@ -49,11 +50,18 @@ public class GameScreen extends JamScreen implements InputProcessor {
         buttonsJustPressed.clear();
         
         entityController = new EntityController();
-        gameViewport = new ExtendViewport(1024, 576);
+        gameCamera = new OrthographicCamera();
+        gameViewport = new ExtendViewport(1024, 576, gameCamera);
+        gameCamera.zoom = 3f;
+        gameViewport.update(Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
+        gameCamera.position.set(474 * 3.5f, gameViewport.getWorldHeight() * gameCamera.zoom / 2,  0);
         core = Core.core;
         skin = core.skin;
     
+        Gdx.graphics.setCursor(core.invisibleCursor);
+        
         stage = new Stage(new ScreenViewport(), core.batch);
+        stage.addActor(new CursorActor());
     
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
@@ -67,6 +75,38 @@ public class GameScreen extends JamScreen implements InputProcessor {
         ParticleEntity entity = new ParticleEntity(core.tossParticleEffect);
         entity.setPosition(200, 200);
         entityController.add(entity);
+    
+        PigEntity pigEntity = new PigEntity();
+        pigEntity.setPosition(500, 200);
+        entityController.add(pigEntity);
+    
+        PlatformEntity platformEntity = new PlatformEntity();
+        platformEntity.setPosition(0, 390);
+        entityController.add(platformEntity);
+    
+        platformEntity = new PlatformEntity();
+        platformEntity.setPosition(474, 390);
+        entityController.add(platformEntity);
+    
+        PlatformMudLeftEntity platformMudLeftEntity = new PlatformMudLeftEntity();
+        platformMudLeftEntity.setPosition(474 * 2, 390);
+        entityController.add(platformMudLeftEntity);
+    
+        PlatformMudEntity platformMudEntity = new PlatformMudEntity();
+        platformMudEntity.setPosition(474 * 3, 390);
+        entityController.add(platformMudEntity);
+    
+        PlatformMudRightEntity platformMudRightEntity = new PlatformMudRightEntity();
+        platformMudRightEntity.setPosition(474 * 4, 390);
+        entityController.add(platformMudRightEntity);
+    
+        platformEntity = new PlatformEntity();
+        platformEntity.setPosition(474 * 5, 390);
+        entityController.add(platformEntity);
+    
+        platformEntity = new PlatformEntity();
+        platformEntity.setPosition(474 * 6, 390);
+        entityController.add(platformEntity);
     }
     
     @Override
@@ -92,7 +132,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
         Gdx.gl.glClearColor(BG_COLOR.r, BG_COLOR.g, BG_COLOR.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     
-        gameViewport.apply(true);
+        gameViewport.apply(false);
         core.batch.setProjectionMatrix(gameViewport.getCamera().combined);
         core.batch.begin();
         core.batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -106,7 +146,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-        gameViewport.update(width, height, true);
+        gameViewport.update(width, height, false);
     }
     
     @Override

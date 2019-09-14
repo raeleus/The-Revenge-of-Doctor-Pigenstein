@@ -1,6 +1,7 @@
 package com.ray3k.template.entities;
 
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.ray3k.template.screens.GameScreen;
 
 public class ParticleEntity extends Entity {
     public ParticleEffect particleEffect;
@@ -21,6 +22,8 @@ public class ParticleEntity extends Entity {
     
     @Override
     public void act(float delta) {
+        setPosition(GameScreen.mouseX, GameScreen.mouseY);
+        
         particleEffect.setPosition(x, y);
         particleEffect.update(delta);
     }

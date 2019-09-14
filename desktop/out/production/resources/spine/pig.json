@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "Akc27jGtKwy6TjHH1aco2njuHMc",
+	"hash": "dK+i7jF1Xf5nDViHpQwZ9wmmR4A",
 	"spine": "3.8.72",
 	"x": -142,
 	"y": -7.87,
@@ -262,16 +262,16 @@
 "animations": {
 	"blink": {
 		"slots": {
-			"eye": {
+			"eye2": {
 				"attachment": [
-					{ "time": 0.1, "name": "eye-02" },
-					{ "time": 0.1333, "name": "eye-03" },
-					{ "time": 0.1667, "name": "eye-02" },
-					{ "time": 0.2, "name": "eye-01" },
+					{ "time": 0.0667, "name": "eye-02" },
+					{ "time": 0.1, "name": "eye-03" },
+					{ "time": 0.1333, "name": "eye-02" },
+					{ "time": 0.1667, "name": "eye-01" },
 					{ "time": 2, "name": "eye" }
 				]
 			},
-			"eye2": {
+			"eye": {
 				"attachment": [
 					{ "time": 0.0667, "name": "eye-02" },
 					{ "time": 0.1, "name": "eye-03" },
@@ -304,6 +304,16 @@
 	"stand": {},
 	"stand-side": {
 		"slots": {
+			"body": {
+				"attachment": [
+					{ "name": null }
+				]
+			},
+			"leg4": {
+				"attachment": [
+					{ "name": "leg" }
+				]
+			},
 			"body-long": {
 				"attachment": [
 					{ "name": "body-long" }
@@ -312,16 +322,6 @@
 			"leg3": {
 				"attachment": [
 					{ "name": "leg" }
-				]
-			},
-			"leg4": {
-				"attachment": [
-					{ "name": "leg" }
-				]
-			},
-			"body": {
-				"attachment": [
-					{ "name": null }
 				]
 			}
 		},
@@ -368,12 +368,12 @@
 	},
 	"surprise": {
 		"slots": {
-			"eye": {
+			"eye2": {
 				"attachment": [
 					{ "name": "eye" }
 				]
 			},
-			"eye2": {
+			"eye": {
 				"attachment": [
 					{ "name": "eye" }
 				]
@@ -382,6 +382,16 @@
 	},
 	"walk": {
 		"slots": {
+			"body": {
+				"attachment": [
+					{ "name": null }
+				]
+			},
+			"leg4": {
+				"attachment": [
+					{ "name": "leg" }
+				]
+			},
 			"body-long": {
 				"attachment": [
 					{ "name": "body-long" }
@@ -390,16 +400,6 @@
 			"leg3": {
 				"attachment": [
 					{ "name": "leg" }
-				]
-			},
-			"leg4": {
-				"attachment": [
-					{ "name": "leg" }
-				]
-			},
-			"body": {
-				"attachment": [
-					{ "name": null }
 				]
 			}
 		},

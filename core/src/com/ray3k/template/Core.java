@@ -1,9 +1,11 @@
 package com.ray3k.template;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.crashinvaders.vfx.VfxManager;
+import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
 import com.esotericsoftware.spine.SkeletonRenderer;
 import com.esotericsoftware.spine.utils.TwoColorPolygonBatch;
@@ -28,17 +31,25 @@ public class Core extends JamGame {
     public VfxManager vfxManager;
     public TextureAtlas textureAtlas;
     public SkeletonData handSkeletonData;
+    public AnimationStateData handAnimationStateData;
     public SkeletonData pigSkeletonData;
+    public AnimationStateData pigAnimationStateData;
     public SkeletonData platformSkeletonData;
+    public AnimationStateData platformAnimationStateData;
     public SkeletonData platformMudSkeletonData;
+    public AnimationStateData platformMudAnimationStateData;
     public SkeletonData platformMudLeftSkeletonData;
+    public AnimationStateData platformMudLeftAnimationStateData;
     public SkeletonData platformMudRightSkeletonData;
+    public AnimationStateData platformMudRightAnimationStateData;
     public ParticleEffect mudParticleEffect;
     public ParticleEffect tossParticleEffect;
+    public Cursor invisibleCursor;
     
     @Override
     public void create() {
         super.create();
+        
         core = this;
         skeletonRenderer = new SkeletonRenderer();
         skeletonRenderer.setPremultipliedAlpha(true);
@@ -52,6 +63,11 @@ public class Core extends JamGame {
                 core.sndClick.play();
             }
         };
+    
+        Pixmap pixmap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
+        pixmap.setColor(1, 1, 1, .01f);
+        pixmap.drawPixel(0, 0);
+        invisibleCursor = Gdx.graphics.newCursor(pixmap, 0, 0);
     
         setScreen(createLoadScreen());
     }
@@ -96,11 +112,17 @@ public class Core extends JamGame {
             textureAtlas = assetManager.get("spine/The Revenge of Doctor Pigenstein.atlas");
             
             handSkeletonData = assetManager.get("spine/hand.json");
+            handAnimationStateData = new AnimationStateData(handSkeletonData);
             pigSkeletonData = assetManager.get("spine/pig.json");
+            pigAnimationStateData = new AnimationStateData(pigSkeletonData);
             platformSkeletonData = assetManager.get("spine/platform.json");
+            platformAnimationStateData = new AnimationStateData(platformSkeletonData);
             platformMudSkeletonData = assetManager.get("spine/platform-mud.json");
+            platformMudAnimationStateData = new AnimationStateData(platformMudSkeletonData);
             platformMudLeftSkeletonData = assetManager.get("spine/platform-mud-left.json");
+            platformMudLeftAnimationStateData = new AnimationStateData(platformMudLeftSkeletonData);
             platformMudRightSkeletonData = assetManager.get("spine/platform-mud-right.json");
+            platformMudRightAnimationStateData = new AnimationStateData(platformMudRightSkeletonData);
             
             mudParticleEffect = assetManager.get("particles/mud.p");
             tossParticleEffect = assetManager.get("particles/toss.p");

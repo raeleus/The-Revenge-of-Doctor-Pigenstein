@@ -1,20 +1,20 @@
 {
 "skeleton": {
-	"hash": "spUP/BOxetRY2zeDoxhYBcQ5lZE",
+	"hash": "lL8iG2pF6LBg8Xvlb/COEK8jibA",
 	"spine": "3.8.72",
-	"x": -12.31,
-	"y": -3.9,
-	"width": 25.08,
-	"height": 29.81,
+	"x": -1.48,
+	"y": -62.12,
+	"width": 61,
+	"height": 66.5,
 	"images": "../output/",
 	"audio": ""
 },
 "bones": [
 	{ "name": "root" },
-	{ "name": "hand-point", "parent": "root", "length": 140.2, "rotation": 132.11, "x": 90.41, "y": -80.07 }
+	{ "name": "hand-point", "parent": "root", "length": 64.9, "rotation": 132.11, "x": 45.41, "y": -46.07 }
 ],
 "slots": [
-	{ "name": "hand-point", "bone": "hand-point", "attachment": "hand-grab" }
+	{ "name": "hand-point", "bone": "hand-point", "attachment": "hand-point" }
 ],
 "skins": [
 	{
@@ -22,28 +22,28 @@
 		"attachments": {
 			"hand-point": {
 				"hand-grab": {
-					"x": 128.04,
-					"y": 5.82,
-					"scaleX": 0.2056,
-					"scaleY": 0.2056,
+					"x": 85.25,
+					"y": -16.16,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
 					"rotation": -132.11,
 					"width": 122,
 					"height": 145
 				},
 				"hand-over": {
-					"x": 125.48,
-					"y": 6.53,
-					"scaleX": 0.2056,
-					"scaleY": 0.2056,
+					"x": 76.01,
+					"y": -9.41,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
 					"rotation": -132.11,
 					"width": 193,
 					"height": 116
 				},
 				"hand-point": {
-					"x": 125.48,
-					"y": 6.53,
-					"scaleX": 0.2056,
-					"scaleY": 0.2056,
+					"x": 24.53,
+					"y": 0.74,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
 					"rotation": -132.11,
 					"width": 122,
 					"height": 133
@@ -53,6 +53,52 @@
 	}
 ],
 "animations": {
-	"animation": {}
+	"grab": {
+		"slots": {
+			"hand-point": {
+				"attachment": [
+					{ "name": "hand-grab" }
+				]
+			}
+		},
+		"bones": {
+			"hand-point": {
+				"translate": [
+					{},
+					{ "time": 0.6, "y": 9 },
+					{ "time": 1.1667 }
+				]
+			}
+		}
+	},
+	"over": {
+		"slots": {
+			"hand-point": {
+				"attachment": [
+					{ "name": "hand-over" }
+				]
+			}
+		},
+		"bones": {
+			"hand-point": {
+				"translate": [
+					{},
+					{ "time": 0.6667, "y": 21 },
+					{ "time": 1.3333 }
+				]
+			}
+		}
+	},
+	"point": {
+		"bones": {
+			"hand-point": {
+				"translate": [
+					{},
+					{ "time": 0.6667, "x": 6, "y": -5 },
+					{ "time": 1.3333 }
+				]
+			}
+		}
+	}
 }
 }

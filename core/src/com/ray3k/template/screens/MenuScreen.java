@@ -2,6 +2,7 @@ package com.ray3k.template.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -34,6 +35,8 @@ public class MenuScreen extends JamScreen {
     public void show() {
         core = Core.core;
         skin = core.skin;
+        
+        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
         
         stage = new Stage(new ScreenViewport(), core.batch);
         Gdx.input.setInputProcessor(stage);
