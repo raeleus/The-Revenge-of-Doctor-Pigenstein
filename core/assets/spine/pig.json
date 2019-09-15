@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "gNq8znIgV6lPmjHYSVFPHlKYcJU",
+	"hash": "sUEYnuLVEjV4dzS0voNlFD1urFM",
 	"spine": "3.8.72",
 	"x": -142,
 	"y": -7.87,
@@ -309,6 +309,16 @@
 					{ "name": "body-long" }
 				]
 			},
+			"bbox": {
+				"attachment": [
+					{ "name": null }
+				]
+			},
+			"bbox-long": {
+				"attachment": [
+					{ "name": "bbox-long" }
+				]
+			},
 			"leg4": {
 				"attachment": [
 					{ "name": "leg" }
@@ -385,6 +395,16 @@
 			"body-long": {
 				"attachment": [
 					{ "name": "body-long" }
+				]
+			},
+			"bbox": {
+				"attachment": [
+					{ "name": null }
+				]
+			},
+			"bbox-long": {
+				"attachment": [
+					{ "name": "bbox-long" }
 				]
 			},
 			"leg4": {

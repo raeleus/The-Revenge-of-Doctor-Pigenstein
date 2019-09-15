@@ -7,6 +7,7 @@ import com.esotericsoftware.spine.SkeletonData;
 import com.ray3k.template.screens.GameScreen;
 
 public class PigEntity extends Entity {
+    private GameScreen gameScreen;
     private SkeletonData skeletonData;
     private AnimationStateData animationStateData;
     private static Animation blinkAnimation;
@@ -21,6 +22,7 @@ public class PigEntity extends Entity {
     @Override
     public void create() {
         depth = GameScreen.PIG_DEPTH;
+        gameScreen = GameScreen.gameScreen;
         
         if (skeletonData == null) {
             skeletonData = core.pigSkeletonData;
@@ -49,7 +51,22 @@ public class PigEntity extends Entity {
     
     @Override
     public void act(float delta) {
-    
+        if (gameScreen.grabbedPig == null) {
+            if (GameScreen.isButtonJustPressed(-1) && skeletonBounds.aabbContainsPoint(GameScreen.mouseX, GameScreen.mouseY)) {
+                gameScreen.grabbedPig = this;
+                gameScreen.grabbedPigOffsetX = x - GameScreen.mouseX;
+                gameScreen.grabbedPigOffsetY = y - GameScreen.mouseY;
+                gameScreen.pigDeltaX = 0;
+                gameScreen.pigDeltaY = 0;
+            }
+        } else if (gameScreen.grabbedPig == this) {
+            if (!GameScreen.isButtonPressed(-1)) {
+                gameScreen.grabbedPig = null;
+                deltaX = gameScreen.pigDeltaX * 2;
+                deltaY = gameScreen.pigDeltaY * 2;
+                setGravity(3000, 270);
+            }
+        }
     }
     
     @Override

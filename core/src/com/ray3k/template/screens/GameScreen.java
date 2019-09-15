@@ -7,11 +7,15 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -42,6 +46,12 @@ public class GameScreen extends JamScreen implements InputProcessor {
     public static int PARTICLE_DEPTH = 100;
     public static int MUD_DEPTH = 0;
     public static int CRATE_DEPTH = 1010;
+    public PigEntity grabbedPig;
+    public float grabbedPigOffsetX;
+    public float grabbedPigOffsetY;
+    public float pigDeltaX;
+    public float pigDeltaY;
+    private GestureDetector gestureDetector;
     
     public GameScreen(Action action) {
         this.action = action;
@@ -68,9 +78,19 @@ public class GameScreen extends JamScreen implements InputProcessor {
         stage = new Stage(new ScreenViewport(), core.batch);
         stage.addActor(new CursorActor());
     
+        gestureDetector = new GestureDetector(new GestureDetector.GestureAdapter() {
+            @Override
+            public boolean fling(float velocityX, float velocityY, int button) {
+                pigDeltaX = velocityX;
+                pigDeltaY = -velocityY;
+                return false;
+            }
+        });
+        
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
         inputMultiplexer.addProcessor(this);
+        inputMultiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(inputMultiplexer);
     
         root = new Table();
@@ -120,6 +140,17 @@ public class GameScreen extends JamScreen implements InputProcessor {
         CrateEntity crateEntity = new CrateEntity();
         crateEntity.setPosition(1493, 380);
         entityController.add(crateEntity);
+    
+//        stage.addListener(new ActorGestureListener() {
+//            @Override
+//            public void fling(InputEvent event, float velocityX, float velocityY, int button) {
+//                if (grabbedPig != null) {
+//                    grabbedPig.deltaX = velocityX;
+//                    grabbedPig.deltaY = velocityY;
+//                    grabbedPig = null;
+//                }
+//            }
+//        });
     }
     
     @Override
@@ -129,6 +160,10 @@ public class GameScreen extends JamScreen implements InputProcessor {
         gameViewport.unproject(tempVector3);
         mouseX = tempVector3.x;
         mouseY = tempVector3.y;
+        
+        if (grabbedPig != null) {
+            grabbedPig.setPosition(mouseX + grabbedPigOffsetX, mouseY + grabbedPigOffsetY);
+        }
         
         stage.act(delta);
         entityController.act(delta);

@@ -58,10 +58,22 @@ public abstract class Entity {
         setMotion(speed, temp1.angle());
     }
     
-    public void moveTowards(float speed, float x, float y, float delta) {
+    public void approach(float speed, float x, float y, float delta) {
         temp1.set(x, y);
         temp1.sub(this.x, this.y);
-        setMotion(Math.min(speed, temp1.len() / delta), temp1.angle());
+        temp1.setLength(speed * delta);
+        
+        if (this.x < x && this.x + temp1.x > x) {
+            this.x = x;
+        } else {
+            this.x += temp1.x;
+        }
+    
+        if (this.y < y && this.y + temp1.y > y) {
+            this.y = y;
+        } else {
+            this.y += temp1.y;
+        }
     }
     
     public void setPosition(float x, float y) {
