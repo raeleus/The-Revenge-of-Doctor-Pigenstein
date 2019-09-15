@@ -42,6 +42,9 @@ public class Core extends JamGame {
     public AnimationStateData platformMudLeftAnimationStateData;
     public SkeletonData platformMudRightSkeletonData;
     public AnimationStateData platformMudRightAnimationStateData;
+    public SkeletonData crateSkeletonData;
+    public AnimationStateData crateAnimationStateData;
+    
     public ParticleEffect mudParticleEffect;
     public ParticleEffect tossParticleEffect;
     public Cursor invisibleCursor;
@@ -93,6 +96,7 @@ public class Core extends JamGame {
         assetManager.load("spine/platform-mud.json", SkeletonData.class, parameter);
         assetManager.load("spine/platform-mud-left.json", SkeletonData.class, parameter);
         assetManager.load("spine/platform-mud-right.json", SkeletonData.class, parameter);
+        assetManager.load("spine/crate.json", SkeletonData.class, parameter);
     
         ParticleEffectLoader.ParticleEffectParameter particleEffectParameter = new ParticleEffectLoader.ParticleEffectParameter();
         particleEffectParameter.atlasFile = "spine/The Revenge of Doctor Pigenstein.atlas";
@@ -123,6 +127,8 @@ public class Core extends JamGame {
             platformMudLeftAnimationStateData = new AnimationStateData(platformMudLeftSkeletonData);
             platformMudRightSkeletonData = assetManager.get("spine/platform-mud-right.json");
             platformMudRightAnimationStateData = new AnimationStateData(platformMudRightSkeletonData);
+            crateSkeletonData = assetManager.get("spine/crate.json");
+            crateAnimationStateData = new AnimationStateData(crateSkeletonData);
             
             mudParticleEffect = assetManager.get("particles/mud.p");
             tossParticleEffect = assetManager.get("particles/toss.p");

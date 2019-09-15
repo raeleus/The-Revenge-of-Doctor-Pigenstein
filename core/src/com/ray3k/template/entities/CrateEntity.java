@@ -5,24 +5,23 @@ import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
 import com.ray3k.template.screens.GameScreen;
 
-public class PlatformMudEntity extends Entity implements ground {
-    private SkeletonData skeletonData;
-    private AnimationStateData animationStateData;
-    private static Animation animation;
+public class CrateEntity extends Entity {
+    private Animation animation;
+    private static SkeletonData skeletonData;
+    private static AnimationStateData animationStateData;
     
     @Override
     public void create() {
-        depth = GameScreen.BACKGROUND_DEPTH;
+        depth = GameScreen.CRATE_DEPTH;
         
         if (skeletonData == null) {
-            skeletonData = core.platformMudSkeletonData;
-            animationStateData = core.platformMudAnimationStateData;
+            skeletonData = core.crateSkeletonData;
+            animationStateData = core.crateAnimationStateData;
             
             animation = skeletonData.findAnimation("animation");
         }
-        
+    
         setSkeletonData(skeletonData, animationStateData);
-        animationState.setAnimation(0, animation, false);
     }
     
     @Override

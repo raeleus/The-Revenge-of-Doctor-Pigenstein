@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
+import com.ray3k.template.screens.GameScreen;
 
 public class PigEntity extends Entity {
     private SkeletonData skeletonData;
@@ -19,6 +20,8 @@ public class PigEntity extends Entity {
     
     @Override
     public void create() {
+        depth = GameScreen.PIG_DEPTH;
+        
         if (skeletonData == null) {
             skeletonData = core.pigSkeletonData;
             animationStateData = core.pigAnimationStateData;

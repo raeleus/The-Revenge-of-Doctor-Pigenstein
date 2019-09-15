@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "dK+i7jF1Xf5nDViHpQwZ9wmmR4A",
+	"hash": "gNq8znIgV6lPmjHYSVFPHlKYcJU",
 	"spine": "3.8.72",
 	"x": -142,
 	"y": -7.87,
@@ -304,9 +304,9 @@
 	"stand": {},
 	"stand-side": {
 		"slots": {
-			"body": {
+			"body-long": {
 				"attachment": [
-					{ "name": null }
+					{ "name": "body-long" }
 				]
 			},
 			"leg4": {
@@ -314,9 +314,9 @@
 					{ "name": "leg" }
 				]
 			},
-			"body-long": {
+			"body": {
 				"attachment": [
-					{ "name": "body-long" }
+					{ "name": null }
 				]
 			},
 			"leg3": {
@@ -382,9 +382,9 @@
 	},
 	"walk": {
 		"slots": {
-			"body": {
+			"body-long": {
 				"attachment": [
-					{ "name": null }
+					{ "name": "body-long" }
 				]
 			},
 			"leg4": {
@@ -392,9 +392,9 @@
 					{ "name": "leg" }
 				]
 			},
-			"body-long": {
+			"body": {
 				"attachment": [
-					{ "name": "body-long" }
+					{ "name": null }
 				]
 			},
 			"leg3": {

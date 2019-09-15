@@ -37,6 +37,11 @@ public class GameScreen extends JamScreen implements InputProcessor {
     private final static Vector3 tempVector3 = new Vector3();
     private static IntArray keysJustPressed = new IntArray();
     private static IntArray buttonsJustPressed = new IntArray();
+    public static int PIG_DEPTH = 10;
+    public static int BACKGROUND_DEPTH = 1000;
+    public static int PARTICLE_DEPTH = 100;
+    public static int MUD_DEPTH = 0;
+    public static int CRATE_DEPTH = 1010;
     
     public GameScreen(Action action) {
         this.action = action;
@@ -52,9 +57,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
         entityController = new EntityController();
         gameCamera = new OrthographicCamera();
         gameViewport = new ExtendViewport(1024, 576, gameCamera);
-        gameCamera.zoom = 3f;
+        gameCamera.zoom = 4f;
         gameViewport.update(Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
-        gameCamera.position.set(474 * 3.5f, gameViewport.getWorldHeight() * gameCamera.zoom / 2,  0);
+        gameCamera.position.set(474 * 4.5f, gameViewport.getWorldHeight() * gameCamera.zoom / 2,  0);
         core = Core.core;
         skin = core.skin;
     
@@ -72,10 +77,6 @@ public class GameScreen extends JamScreen implements InputProcessor {
         root.setFillParent(true);
         stage.addActor(root);
     
-        ParticleEntity entity = new ParticleEntity(core.tossParticleEffect);
-        entity.setPosition(200, 200);
-        entityController.add(entity);
-    
         PigEntity pigEntity = new PigEntity();
         pigEntity.setPosition(500, 200);
         entityController.add(pigEntity);
@@ -88,25 +89,37 @@ public class GameScreen extends JamScreen implements InputProcessor {
         platformEntity.setPosition(474, 390);
         entityController.add(platformEntity);
     
+        platformEntity = new PlatformEntity();
+        platformEntity.setPosition(474 * 2, 390);
+        entityController.add(platformEntity);
+    
         PlatformMudLeftEntity platformMudLeftEntity = new PlatformMudLeftEntity();
-        platformMudLeftEntity.setPosition(474 * 2, 390);
+        platformMudLeftEntity.setPosition(474 * 3, 390);
         entityController.add(platformMudLeftEntity);
     
         PlatformMudEntity platformMudEntity = new PlatformMudEntity();
-        platformMudEntity.setPosition(474 * 3, 390);
+        platformMudEntity.setPosition(474 * 4, 390);
         entityController.add(platformMudEntity);
     
         PlatformMudRightEntity platformMudRightEntity = new PlatformMudRightEntity();
-        platformMudRightEntity.setPosition(474 * 4, 390);
+        platformMudRightEntity.setPosition(474 * 5, 390);
         entityController.add(platformMudRightEntity);
-    
-        platformEntity = new PlatformEntity();
-        platformEntity.setPosition(474 * 5, 390);
-        entityController.add(platformEntity);
     
         platformEntity = new PlatformEntity();
         platformEntity.setPosition(474 * 6, 390);
         entityController.add(platformEntity);
+    
+        platformEntity = new PlatformEntity();
+        platformEntity.setPosition(474 * 7, 390);
+        entityController.add(platformEntity);
+    
+        platformEntity = new PlatformEntity();
+        platformEntity.setPosition(474 * 8, 390);
+        entityController.add(platformEntity);
+        
+        CrateEntity crateEntity = new CrateEntity();
+        crateEntity.setPosition(1493, 380);
+        entityController.add(crateEntity);
     }
     
     @Override

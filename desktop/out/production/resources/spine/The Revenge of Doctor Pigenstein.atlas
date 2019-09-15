@@ -2,7 +2,7 @@
 The Revenge of Doctor Pigenstein.png
 size: 2048,2048
 format: RGBA8888
-filter: MipMapLinearLinear,Linear
+filter: Linear,Linear
 repeat: none
 beard
   rotate: false
@@ -13,14 +13,14 @@ beard
   index: -1
 body
   rotate: false
-  xy: 1144, 1502
+  xy: 1405, 1471
   size: 278, 278
   orig: 278, 278
   offset: 0, 0
   index: -1
 body-long
   rotate: false
-  xy: 1424, 1457
+  xy: 1, 1375
   size: 421, 263
   orig: 421, 263
   offset: 0, 0
@@ -30,6 +30,13 @@ camoflage
   xy: 504, 1622
   size: 202, 202
   orig: 202, 202
+  offset: 0, 0
+  index: -1
+crate
+  rotate: true
+  xy: 1144, 1522
+  size: 258, 259
+  orig: 258, 259
   offset: 0, 0
   index: -1
 curly-mustache
@@ -90,28 +97,28 @@ glasses
   index: -1
 ground
   rotate: false
-  xy: 477, 1206
+  xy: 900, 1130
   size: 474, 390
   orig: 474, 390
   offset: 0, 0
   index: -1
 ground-mud
   rotate: false
-  xy: 953, 1065
+  xy: 1376, 1079
   size: 474, 390
   orig: 474, 390
   offset: 0, 0
   index: -1
 ground-mud-left
-  rotate: false
-  xy: 1429, 1065
+  rotate: true
+  xy: 1, 899
   size: 474, 390
   orig: 474, 390
   offset: 0, 0
   index: -1
 ground-mud-right
   rotate: false
-  xy: 1, 1248
+  xy: 424, 1215
   size: 474, 390
   orig: 474, 390
   offset: 0, 0

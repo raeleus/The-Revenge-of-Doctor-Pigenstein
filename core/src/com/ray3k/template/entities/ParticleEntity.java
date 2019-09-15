@@ -12,7 +12,7 @@ public class ParticleEntity extends Entity {
     
     @Override
     public void create() {
-    
+        depth = GameScreen.PARTICLE_DEPTH;
     }
     
     @Override

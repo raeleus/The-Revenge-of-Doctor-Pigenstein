@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
+import com.ray3k.template.screens.GameScreen;
 
 public class PlatformEntity extends Entity implements ground {
     private SkeletonData skeletonData;
@@ -12,6 +13,8 @@ public class PlatformEntity extends Entity implements ground {
     
     @Override
     public void create() {
+        depth = GameScreen.BACKGROUND_DEPTH;
+        
         if (skeletonData == null) {
             skeletonData = core.platformSkeletonData;
             animationStateData = core.platformAnimationStateData;
