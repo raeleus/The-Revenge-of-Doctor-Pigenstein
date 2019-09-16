@@ -1,5 +1,6 @@
 package com.ray3k.template.entities;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
@@ -64,7 +65,7 @@ public class DoctorEntity extends Entity {
             public void event(AnimationState.TrackEntry entry, Event event) {
                 switch (event.getData().getName()) {
                     case "01":
-                        Sound sound = core.assetManager.get("sfx/01.mp3");
+                        Music sound = core.assetManager.get("sfx/01.mp3");
                         sound.play();
                         break;
                     case "02":

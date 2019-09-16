@@ -106,12 +106,12 @@ public class Core extends JamGame {
         assetManager.load("particles/tears.p", ParticleEffect.class, particleEffectParameter);
         
         assetManager.load("sfx/click.mp3", Sound.class);
-        assetManager.load("sfx/01.mp3", Sound.class);
-        assetManager.load("sfx/02.mp3", Sound.class);
-        assetManager.load("sfx/03.mp3", Sound.class);
-        assetManager.load("sfx/04.mp3", Sound.class);
-        assetManager.load("sfx/05.mp3", Sound.class);
-        assetManager.load("sfx/06.mp3", Sound.class);
+        assetManager.load("sfx/01.mp3", Music.class);
+        assetManager.load("sfx/02.mp3", Music.class);
+        assetManager.load("sfx/03.mp3", Music.class);
+        assetManager.load("sfx/04.mp3", Music.class);
+        assetManager.load("sfx/05.mp3", Music.class);
+        assetManager.load("sfx/06.mp3", Music.class);
         assetManager.load("sfx/cry.mp3", Sound.class);
         assetManager.load("sfx/splash.mp3", Sound.class);
         assetManager.load("sfx/pig.mp3", Sound.class);

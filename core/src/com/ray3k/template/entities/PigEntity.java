@@ -132,6 +132,14 @@ public class PigEntity extends Entity {
             @Override
             public void start(AnimationState.TrackEntry entry) {
                 if (entry.getAnimation() == frownAnimation) {
+                    if (tearParticleEntity1 != null) {
+                        tearParticleEntity1.destroy = true;
+                    }
+                    
+                    if (tearParticleEntity2 != null) {
+                        tearParticleEntity2.destroy = true;
+                    }
+                    
                     tearParticleEntity1 = new ParticleEntity(core.tearParticleEffect);
                     tearParticleEntity1.particleEffect.reset();
                     tearParticleEntity1.depth = GameScreen.MUD_DEPTH;
