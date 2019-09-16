@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
+import com.ray3k.template.Core;
 import com.ray3k.template.screens.GameScreen;
 
 public class PigEntity extends Entity {
@@ -20,6 +21,7 @@ public class PigEntity extends Entity {
     private static Animation walkAnimation;
     private boolean crying;
     private float runSpeed;
+    private ParticleEntity tossParticleEntity;
     
     @Override
     public void create() {
@@ -38,6 +40,8 @@ public class PigEntity extends Entity {
             standSideAnimation = skeletonData.findAnimation("stand-side");
             surpriseAnimation = skeletonData.findAnimation("surprise");
             walkAnimation = skeletonData.findAnimation("walk");
+            
+            animationStateData.setMix(standAnimation,  walkAnimation, .25f);
         }
         
         setSkeletonData(skeletonData, animationStateData);
@@ -63,11 +67,24 @@ public class PigEntity extends Entity {
             if (crying) {
                 if (x < 2070) {
                     deltaX = -runSpeed;
+                    if (skeleton.getScaleX() != -1) {
+                        animationState.setAnimation(0, standAnimation, false);
+                        animationState.addAnimation(0, walkAnimation, true, 0);
+                    }
                     skeleton.setScaleX(-1);
                 } else {
                     deltaX = runSpeed;
+                    if (skeleton.getScaleX() != 1) {
+                        animationState.setAnimation(0, standAnimation, false);
+                        animationState.addAnimation(0, walkAnimation, true, 0);
+                    }
                     skeleton.setScaleX(1);
                 }
+            }
+    
+            if (tossParticleEntity != null) {
+                tossParticleEntity.destroy = true;
+                tossParticleEntity = null;
             }
         } else if (y > 2290) {
             y = 2290;
@@ -88,11 +105,24 @@ public class PigEntity extends Entity {
                 deltaX = gameScreen.pigDeltaX * 2;
                 deltaY = gameScreen.pigDeltaY * 2;
                 setGravity(3000, 270);
+                
+                if (tossParticleEntity == null) {
+                    tossParticleEntity = new ParticleEntity(core.tossParticleEffect);
+                    gameScreen.entityController.add(tossParticleEntity);
+                }
             }
         }
         
         if (gameScreen.grabbedPig != this && (skeletonBounds.getMinX() > 4273 || skeletonBounds.getMaxX() < 0)) {
             destroy = true;
+            if (tossParticleEntity != null) {
+                tossParticleEntity.destroy = true;
+                tossParticleEntity = null;
+            }
+        }
+        
+        if (tossParticleEntity != null) {
+            tossParticleEntity.setPosition(skeletonBounds.getMinX() + skeletonBounds.getWidth() / 2, skeletonBounds.getMinY() + skeletonBounds.getHeight() / 2.0f);
         }
     }
     

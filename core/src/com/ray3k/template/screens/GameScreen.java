@@ -48,7 +48,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     private static IntArray buttonsJustPressed = new IntArray();
     public static int PIG_DEPTH = 100;
     public static int BACKGROUND_DEPTH = 10;
-    public static int PARTICLE_DEPTH = 1;
+    public static int PARTICLE_DEPTH = 101;
     public static int MUD_DEPTH = 0;
     public static int CRATE_DEPTH = 1010;
     public PigEntity grabbedPig;

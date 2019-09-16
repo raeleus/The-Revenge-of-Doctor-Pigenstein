@@ -22,8 +22,6 @@ public class ParticleEntity extends Entity {
     
     @Override
     public void act(float delta) {
-        setPosition(GameScreen.mouseX, GameScreen.mouseY);
-        
         particleEffect.setPosition(x, y);
         particleEffect.update(delta);
     }
@@ -36,6 +34,6 @@ public class ParticleEntity extends Entity {
     
     @Override
     public void destroy() {
-    
+        particleEffect.dispose();
     }
 }
