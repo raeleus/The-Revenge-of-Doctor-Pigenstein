@@ -49,6 +49,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     public static int PARTICLE_DEPTH = 101;
     public static int MUD_DEPTH = 0;
     public static int CRATE_DEPTH = 1010;
+    public static int DOCTOR_DEPTH = 1020;
     public PigEntity grabbedPig;
     public float grabbedPigOffsetX;
     public float grabbedPigOffsetY;
@@ -206,6 +207,10 @@ public class GameScreen extends JamScreen implements InputProcessor {
         CrateEntity crateEntity = new CrateEntity();
         crateEntity.setPosition(1493, 380);
         entityController.add(crateEntity);
+        
+        DoctorEntity doctorEntity = new DoctorEntity();
+        doctorEntity.setPosition(1493, 620);
+        entityController.add(doctorEntity);
     }
     
     @Override
