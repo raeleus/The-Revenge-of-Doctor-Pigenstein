@@ -18,6 +18,8 @@ public class PigEntity extends Entity {
     private static Animation standSideAnimation;
     private static Animation surpriseAnimation;
     private static Animation walkAnimation;
+    private boolean crying;
+    private float runSpeed;
     
     @Override
     public void create() {
@@ -42,6 +44,8 @@ public class PigEntity extends Entity {
         animationState.setAnimation(0, walkAnimation, true);
         animationState.setAnimation(1, smileAnimation, true);
         animationState.addAnimation(2, blinkAnimation, true, MathUtils.random(3f));
+        crying = true;
+        runSpeed = 200;
     }
     
     @Override
@@ -51,7 +55,26 @@ public class PigEntity extends Entity {
     
     @Override
     public void act(float delta) {
-        if (gameScreen.grabbedPig == null) {
+        if (y < 376) {
+            y = 376;
+            gravityY = 0;
+            deltaX = 0;
+            deltaY = 0;
+            if (crying) {
+                if (x < 2070) {
+                    deltaX = -runSpeed;
+                    skeleton.setScaleX(-1);
+                } else {
+                    deltaX = runSpeed;
+                    skeleton.setScaleX(1);
+                }
+            }
+        } else if (y > 2290) {
+            y = 2290;
+            deltaY = -Math.abs(deltaY);
+        }
+        
+        if (gameScreen.grabbedPig == null && crying) {
             if (GameScreen.isButtonJustPressed(-1) && skeletonBounds.aabbContainsPoint(GameScreen.mouseX, GameScreen.mouseY)) {
                 gameScreen.grabbedPig = this;
                 gameScreen.grabbedPigOffsetX = x - GameScreen.mouseX;
@@ -66,6 +89,10 @@ public class PigEntity extends Entity {
                 deltaY = gameScreen.pigDeltaY * 2;
                 setGravity(3000, 270);
             }
+        }
+        
+        if (gameScreen.grabbedPig != this && (skeletonBounds.getMinX() > 4273 || skeletonBounds.getMaxX() < 0)) {
+            destroy = true;
         }
     }
     

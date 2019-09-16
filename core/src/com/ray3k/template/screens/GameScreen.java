@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -23,6 +24,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ray3k.template.Core;
 import com.ray3k.template.JamScreen;
+import com.ray3k.template.Utils;
 import com.ray3k.template.entities.*;
 
 public class GameScreen extends JamScreen implements InputProcessor {
@@ -41,9 +43,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
     private final static Vector3 tempVector3 = new Vector3();
     private static IntArray keysJustPressed = new IntArray();
     private static IntArray buttonsJustPressed = new IntArray();
-    public static int PIG_DEPTH = 10;
-    public static int BACKGROUND_DEPTH = 1000;
-    public static int PARTICLE_DEPTH = 100;
+    public static int PIG_DEPTH = 100;
+    public static int BACKGROUND_DEPTH = 10;
+    public static int PARTICLE_DEPTH = 1;
     public static int MUD_DEPTH = 0;
     public static int CRATE_DEPTH = 1010;
     public PigEntity grabbedPig;
@@ -52,6 +54,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     public float pigDeltaX;
     public float pigDeltaY;
     private GestureDetector gestureDetector;
+    private Array<PlatformEntity> platforms;
     
     public GameScreen(Action action) {
         this.action = action;
@@ -72,6 +75,8 @@ public class GameScreen extends JamScreen implements InputProcessor {
         gameCamera.position.set(474 * 4.5f, gameViewport.getWorldHeight() * gameCamera.zoom / 2,  0);
         core = Core.core;
         skin = core.skin;
+        
+        platforms = new Array<>();
     
         Gdx.graphics.setCursor(core.invisibleCursor);
         
@@ -104,53 +109,51 @@ public class GameScreen extends JamScreen implements InputProcessor {
         PlatformEntity platformEntity = new PlatformEntity();
         platformEntity.setPosition(0, 390);
         entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
         platformEntity = new PlatformEntity();
         platformEntity.setPosition(474, 390);
         entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
         platformEntity = new PlatformEntity();
         platformEntity.setPosition(474 * 2, 390);
         entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
-        PlatformMudLeftEntity platformMudLeftEntity = new PlatformMudLeftEntity();
-        platformMudLeftEntity.setPosition(474 * 3, 390);
-        entityController.add(platformMudLeftEntity);
+        platformEntity = new PlatformMudLeftEntity();
+        platformEntity.setPosition(474 * 3, 390);
+        entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
-        PlatformMudEntity platformMudEntity = new PlatformMudEntity();
-        platformMudEntity.setPosition(474 * 4, 390);
-        entityController.add(platformMudEntity);
+        platformEntity = new PlatformMudEntity();
+        platformEntity.setPosition(474 * 4, 390);
+        entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
-        PlatformMudRightEntity platformMudRightEntity = new PlatformMudRightEntity();
-        platformMudRightEntity.setPosition(474 * 5, 390);
-        entityController.add(platformMudRightEntity);
+        platformEntity = new PlatformMudRightEntity();
+        platformEntity.setPosition(474 * 5, 390);
+        entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
         platformEntity = new PlatformEntity();
         platformEntity.setPosition(474 * 6, 390);
         entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
         platformEntity = new PlatformEntity();
         platformEntity.setPosition(474 * 7, 390);
         entityController.add(platformEntity);
+        platforms.add(platformEntity);
     
         platformEntity = new PlatformEntity();
         platformEntity.setPosition(474 * 8, 390);
         entityController.add(platformEntity);
+        platforms.add(platformEntity);
         
         CrateEntity crateEntity = new CrateEntity();
         crateEntity.setPosition(1493, 380);
         entityController.add(crateEntity);
-    
-//        stage.addListener(new ActorGestureListener() {
-//            @Override
-//            public void fling(InputEvent event, float velocityX, float velocityY, int button) {
-//                if (grabbedPig != null) {
-//                    grabbedPig.deltaX = velocityX;
-//                    grabbedPig.deltaY = velocityY;
-//                    grabbedPig = null;
-//                }
-//            }
-//        });
     }
     
     @Override

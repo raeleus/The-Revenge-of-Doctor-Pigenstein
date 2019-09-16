@@ -5,14 +5,14 @@ import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
 import com.ray3k.template.screens.GameScreen;
 
-public class PlatformMudLeftEntity extends Entity implements ground {
+public class PlatformMudLeftEntity extends PlatformEntity {
     private SkeletonData skeletonData;
     private AnimationStateData animationStateData;
     private static Animation animation;
     
     @Override
     public void create() {
-        depth = GameScreen.BACKGROUND_DEPTH;
+        super.create();
         
         if (skeletonData == null) {
             skeletonData = core.platformMudLeftSkeletonData;

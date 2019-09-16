@@ -6,7 +6,7 @@ import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
 import com.ray3k.template.screens.GameScreen;
 
-public class PlatformEntity extends Entity implements ground {
+public class PlatformEntity extends Entity {
     private SkeletonData skeletonData;
     private AnimationStateData animationStateData;
     private static Animation animation;
