@@ -287,6 +287,28 @@ public class GameScreen extends JamScreen implements InputProcessor {
         dialog.show(stage);
     }
     
+    public void showEndDialog() {
+        Dialog dialog = new Dialog("", skin) {
+            @Override
+            protected void result(Object object) {
+                if ((Boolean) object) {
+                    core.setScreen(core.createGameScreen());
+                } else {
+                    core.setScreen(core.createMenuScreen());
+                }
+            }
+        };
+        dialog.getContentTable().pad(20);
+        Label label = new Label("Final Score: " + score + "\n" +
+                "Doctor Pigenstein is very sorry about being mean." +
+                "\nThanks for helping the piggy friends!", skin);
+        label.setAlignment(Align.center);
+        dialog.text(label);
+        dialog.button("Play Again", true);
+        dialog.button("Back to Menu", false);
+        dialog.show(stage);
+    }
+    
     public void increaseMode() {
         mode++;
         
@@ -348,7 +370,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
                 doctorEntity.animationState.setAnimation(0, "say_06", false);
                 break;
             case 12:
-                //show game end dialog
+                showEndDialog();
                 break;
         }
     }

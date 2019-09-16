@@ -115,7 +115,7 @@ public class Core extends JamGame {
         assetManager.load("bgm/music-test.mp3", Music.class);
     }
     
-    private Screen createLoadScreen() {
+    public Screen createLoadScreen() {
         return new LoadScreen(Actions.run(() -> {
             skin = assetManager.get("ui/ui.json");
             sndClick = assetManager.get("sfx/click.mp3");
@@ -143,21 +143,21 @@ public class Core extends JamGame {
         }));
     }
     
-    private Screen createSplashScreen() {
+    public Screen createSplashScreen() {
         return new SplashScreen(Actions.run(() -> setScreen(createMenuScreen())));
     }
     
-    private Screen createMenuScreen() {
+    public Screen createMenuScreen() {
         return new MenuScreen(Actions.run(() -> setScreen(createGameScreen())),
                 Actions.run(() -> setScreen(createOptionsScreen())),
                 Actions.run(() -> setScreen(createCreditsScreen())));
     }
     
-    private Screen createGameScreen() {
+    public Screen createGameScreen() {
         return new GameScreen(Actions.run(() -> setScreen(createGameOverScreen())));
     }
     
-    private Screen createGameOverScreen() {
+    public Screen createGameOverScreen() {
         return new GameOverScreen(Actions.run(() -> setScreen(createMenuScreen())));
     }
     
