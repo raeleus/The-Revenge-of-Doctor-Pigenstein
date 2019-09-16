@@ -13,9 +13,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -81,6 +84,16 @@ public class GameScreen extends JamScreen implements InputProcessor {
         Gdx.graphics.setCursor(core.invisibleCursor);
         
         stage = new Stage(new ScreenViewport(), core.batch);
+    
+        Table root = new Table();
+        root.setFillParent(true);
+        stage.addActor(root);
+    
+        Label label = new Label("100", skin, "black");
+        root.add(label).expandY().top();
+        
+        showIntroDialog();
+        
         stage.addActor(new CursorActor());
     
         gestureDetector = new GestureDetector(new GestureDetector.GestureAdapter() {
@@ -193,6 +206,18 @@ public class GameScreen extends JamScreen implements InputProcessor {
         core.batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         stage.draw();
     }
+    
+    public void showIntroDialog() {
+        Dialog dialog = new Dialog("", skin);
+        dialog.getContentTable().pad(20);
+        Label label = new Label("Doctor Pigenstein is not being nice!\nHe won't let the other piggies have fun in the mud puddle.\nCan you toss the piggies back in?\nThe bigger the splash, the happier the pig!", skin);
+        label.setAlignment(Align.center);
+        dialog.text(label);
+        dialog.button("Begin", null);
+        dialog.show(stage);
+    }
+    
+    /**todo: add all the key/button logging to base Jam Screen.**/
     
     @Override
     public void resize(int width, int height) {
