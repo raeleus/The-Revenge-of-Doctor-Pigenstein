@@ -1,0 +1,59 @@
+{
+"skeleton": {
+	"hash": "3hX/L9GWME7yXvv0ReunyGMlhIc",
+	"spine": "3.8.72",
+	"x": 113.16,
+	"y": -241.41,
+	"width": 308,
+	"height": 469,
+	"images": "../output/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "mud-00", "bone": "root", "attachment": "mud-00" },
+	{ "name": "mud-01", "bone": "root", "attachment": "mud-01" },
+	{ "name": "mud-02", "bone": "root", "attachment": "mud-02" },
+	{ "name": "mud-03", "bone": "root", "attachment": "mud-03" },
+	{ "name": "particle-cross", "bone": "root", "attachment": "particle-cross" },
+	{ "name": "particle-heart", "bone": "root", "attachment": "particle-heart" },
+	{ "name": "particle-spikes", "bone": "root", "attachment": "particle-spikes" },
+	{ "name": "particle-star", "bone": "root", "attachment": "particle-star" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"particle-spikes": {
+				"particle-spikes": { "x": 195.66, "y": -154.91, "width": 165, "height": 173 }
+			},
+			"particle-star": {
+				"particle-star": { "x": 339.16, "y": 14.59, "width": 164, "height": 156 }
+			},
+			"mud-00": {
+				"mud-00": { "x": 237.66, "y": 202.59, "width": 39, "height": 50 }
+			},
+			"mud-01": {
+				"mud-01": { "x": 129.66, "y": 217.59, "width": 33, "height": 20 }
+			},
+			"mud-02": {
+				"mud-02": { "x": 161.66, "y": 217.09, "width": 21, "height": 21 }
+			},
+			"mud-03": {
+				"mud-03": { "x": 195.16, "y": 209.59, "width": 36, "height": 36 }
+			},
+			"particle-cross": {
+				"particle-cross": { "x": 182.66, "y": 23.09, "width": 139, "height": 139 }
+			},
+			"particle-heart": {
+				"particle-heart": { "x": 328.16, "y": 162.59, "width": 132, "height": 130 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {}
+}
+}

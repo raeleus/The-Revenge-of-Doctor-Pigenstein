@@ -49,7 +49,7 @@ public class PigEntity extends Entity {
         animationState.setAnimation(1, smileAnimation, true);
         animationState.addAnimation(2, blinkAnimation, true, MathUtils.random(3f));
         crying = true;
-        runSpeed = 200;
+        runSpeed = MathUtils.random(200, 500);
     }
     
     @Override
@@ -66,21 +66,7 @@ public class PigEntity extends Entity {
             deltaX = 0;
             deltaY = 0;
             if (crying) {
-                if (x < 2070) {
-                    deltaX = -runSpeed;
-                    if (skeleton.getScaleX() != -1) {
-                        animationState.setAnimation(0, standAnimation, false);
-                        animationState.addAnimation(0, walkAnimation, true, 0);
-                    }
-                    skeleton.setScaleX(-1);
-                } else {
-                    deltaX = runSpeed;
-                    if (skeleton.getScaleX() != 1) {
-                        animationState.setAnimation(0, standAnimation, false);
-                        animationState.addAnimation(0, walkAnimation, true, 0);
-                    }
-                    skeleton.setScaleX(1);
-                }
+                beginWalking();
             }
     
             if (tossParticleEntity != null) {
@@ -138,6 +124,24 @@ public class PigEntity extends Entity {
         
         if (tossParticleEntity != null) {
             tossParticleEntity.setPosition(skeletonBounds.getMinX() + skeletonBounds.getWidth() / 2, skeletonBounds.getMinY() + skeletonBounds.getHeight() / 2.0f);
+        }
+    }
+    
+    public void beginWalking() {
+        if (x < 2070) {
+            deltaX = -runSpeed;
+            if (skeleton.getScaleX() != -1) {
+                animationState.setAnimation(0, standAnimation, false);
+                animationState.addAnimation(0, walkAnimation, true, 0);
+            }
+            skeleton.setScaleX(-1);
+        } else {
+            deltaX = runSpeed;
+            if (skeleton.getScaleX() != 1) {
+                animationState.setAnimation(0, standAnimation, false);
+                animationState.addAnimation(0, walkAnimation, true, 0);
+            }
+            skeleton.setScaleX(1);
         }
     }
     
