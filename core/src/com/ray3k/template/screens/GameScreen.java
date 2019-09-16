@@ -83,7 +83,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     
         Gdx.graphics.setCursor(core.invisibleCursor);
         
-        stage = new Stage(new ScreenViewport(), core.batch);
+        stage = new Stage(new ExtendViewport(1024, 576), core.batch);
     
         Table root = new Table();
         root.setFillParent(true);

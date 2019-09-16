@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ray3k.template.Core;
 import com.ray3k.template.JamScreen;
@@ -38,7 +39,7 @@ public class MenuScreen extends JamScreen {
         
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
         
-        stage = new Stage(new ScreenViewport(), core.batch);
+        stage = new Stage(new ExtendViewport(1024, 576), core.batch);
         Gdx.input.setInputProcessor(stage);
     
         Table root = new Table();
