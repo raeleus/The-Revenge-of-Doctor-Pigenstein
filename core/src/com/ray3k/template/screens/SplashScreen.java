@@ -55,7 +55,7 @@ public class SplashScreen extends JamScreen {
                 Gdx.input.setInputProcessor(null);
                 action.setActor(stage.getRoot());
                 fg.addAction(Actions.sequence(Actions.fadeIn(.3f), action));
-//                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             }
         });
     }

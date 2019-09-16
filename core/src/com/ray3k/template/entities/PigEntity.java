@@ -1,11 +1,10 @@
 package com.ray3k.template.entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.esotericsoftware.spine.Animation;
-import com.esotericsoftware.spine.AnimationStateData;
-import com.esotericsoftware.spine.SkeletonData;
-import com.esotericsoftware.spine.Skin;
+import com.esotericsoftware.spine.*;
 import com.ray3k.template.Core;
 import com.ray3k.template.screens.GameScreen;
 
@@ -51,6 +50,9 @@ public class PigEntity extends Entity {
     public boolean wearingGlasses;
     public boolean wearingMustache;
     public boolean wearingMakeup;
+    private ParticleEntity tearParticleEntity1;
+    private ParticleEntity tearParticleEntity2;
+    private static final Vector2 temp = new Vector2();
     
     @Override
     public void create() {
@@ -125,6 +127,37 @@ public class PigEntity extends Entity {
         animationState.addAnimation(2, blinkAnimation, true, MathUtils.random(3f));
         crying = false;
         runSpeed = MathUtils.random(200, 500);
+        
+        animationState.addListener(new AnimationState.AnimationStateAdapter() {
+            @Override
+            public void start(AnimationState.TrackEntry entry) {
+                if (entry.getAnimation() == frownAnimation) {
+                    tearParticleEntity1 = new ParticleEntity(core.tearParticleEffect);
+                    tearParticleEntity1.particleEffect.reset();
+                    tearParticleEntity1.depth = GameScreen.MUD_DEPTH;
+                    gameScreen.entityController.add(tearParticleEntity1);
+                    tearParticleEntity2 = new ParticleEntity(core.tearParticleEffect);
+                    tearParticleEntity2.particleEffect.reset();
+                    tearParticleEntity2.depth = GameScreen.MUD_DEPTH;
+                    gameScreen.entityController.add(tearParticleEntity2);
+                }
+            }
+    
+            @Override
+            public void end(AnimationState.TrackEntry entry) {
+                if (entry.getAnimation() == frownAnimation) {
+                    if (tearParticleEntity1 != null) {
+                        tearParticleEntity1.destroy = true;
+                        tearParticleEntity1 = null;
+                    }
+    
+                    if (tearParticleEntity2 != null) {
+                        tearParticleEntity2.destroy = true;
+                        tearParticleEntity2 = null;
+                    }
+                }
+            }
+        });
     }
     
     @Override
@@ -134,6 +167,18 @@ public class PigEntity extends Entity {
     
     @Override
     public void act(float delta) {
+        if (tearParticleEntity1 != null) {
+            temp.set(0, 0);
+            skeleton.findBone("tear1").localToWorld(temp);
+            tearParticleEntity1.setPosition(temp.x, temp.y);
+        }
+    
+        if (tearParticleEntity2 != null) {
+            temp.set(0, 0);
+            skeleton.findBone("tear2").localToWorld(temp);
+            tearParticleEntity2.setPosition(temp.x, temp.y);
+        }
+        
         if (y < 376) {
             float score = getSpeed();
             y = 376;
@@ -160,6 +205,10 @@ public class PigEntity extends Entity {
                 particleEntity.depth = GameScreen.MUD_DEPTH;
                 particleEntity.particleEffect.scaleEffect(score / 2000);
                 gameScreen.entityController.add(particleEntity);
+    
+                Sound sound = core.assetManager.get("sfx/splash.mp3");
+                sound.play();
+                animationState.setAnimation(1, smileAnimation, true);
             }
         } else if (y > 2290) {
             y = 2290;
@@ -173,6 +222,9 @@ public class PigEntity extends Entity {
                 gameScreen.grabbedPigOffsetY = y - GameScreen.mouseY;
                 gameScreen.pigDeltaX = 0;
                 gameScreen.pigDeltaY = 0;
+                Sound sound = core.assetManager.get("sfx/pig.mp3");
+                sound.play();
+                animationState.setAnimation(1, surpriseAnimation, true);
             }
         } else if (gameScreen.grabbedPig == this) {
             if (!GameScreen.isButtonPressed(-1)) {
@@ -203,6 +255,7 @@ public class PigEntity extends Entity {
     }
     
     public void beginWalking() {
+        animationState.setAnimation(1, frownAnimation, false);
         if (x < 2070) {
             deltaX = -runSpeed;
             animationState.setAnimation(0, standAnimation, false);
@@ -223,6 +276,14 @@ public class PigEntity extends Entity {
     
     @Override
     public void destroy() {
+        if (tearParticleEntity1 != null) {
+            tearParticleEntity1.destroy = true;
+            tearParticleEntity1 = null;
+        }
     
+        if (tearParticleEntity2 != null) {
+            tearParticleEntity2.destroy = true;
+            tearParticleEntity2 = null;
+        }
     }
 }

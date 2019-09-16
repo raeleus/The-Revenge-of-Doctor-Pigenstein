@@ -1,10 +1,10 @@
 {
 "skeleton": {
-	"hash": "3hX/L9GWME7yXvv0ReunyGMlhIc",
+	"hash": "f08cNIsnEbWzAFi6/raKHrt0Ogs",
 	"spine": "3.8.72",
-	"x": 113.16,
+	"x": 77.55,
 	"y": -241.41,
-	"width": 308,
+	"width": 343.61,
 	"height": 469,
 	"images": "../output/",
 	"audio": ""
@@ -20,12 +20,20 @@
 	{ "name": "particle-cross", "bone": "root", "attachment": "particle-cross" },
 	{ "name": "particle-heart", "bone": "root", "attachment": "particle-heart" },
 	{ "name": "particle-spikes", "bone": "root", "attachment": "particle-spikes" },
-	{ "name": "particle-star", "bone": "root", "attachment": "particle-star" }
+	{ "name": "particle-star", "bone": "root", "attachment": "particle-star" },
+	{ "name": "tear-00", "bone": "root", "attachment": "tear-00" },
+	{ "name": "tear-01", "bone": "root", "attachment": "tear-01" }
 ],
 "skins": [
 	{
 		"name": "default",
 		"attachments": {
+			"tear-00": {
+				"tear-00": { "x": 86.55, "y": 106.63, "width": 18, "height": 35 }
+			},
+			"tear-01": {
+				"tear-01": { "x": 132.4, "y": 109.25, "width": 28, "height": 40 }
+			},
 			"particle-spikes": {
 				"particle-spikes": { "x": 195.66, "y": -154.91, "width": 165, "height": 173 }
 			},

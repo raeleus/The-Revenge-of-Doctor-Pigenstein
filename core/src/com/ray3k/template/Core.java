@@ -47,6 +47,7 @@ public class Core extends JamGame {
     
     public ParticleEffect mudParticleEffect;
     public ParticleEffect tossParticleEffect;
+    public ParticleEffect tearParticleEffect;
     public Cursor invisibleCursor;
     
     @Override
@@ -102,6 +103,7 @@ public class Core extends JamGame {
         particleEffectParameter.atlasFile = "spine/The Revenge of Doctor Pigenstein.atlas";
         assetManager.load("particles/toss.p", ParticleEffect.class, particleEffectParameter);
         assetManager.load("particles/mud.p", ParticleEffect.class, particleEffectParameter);
+        assetManager.load("particles/tears.p", ParticleEffect.class, particleEffectParameter);
         
         assetManager.load("sfx/click.mp3", Sound.class);
         assetManager.load("sfx/01.mp3", Sound.class);
@@ -110,6 +112,9 @@ public class Core extends JamGame {
         assetManager.load("sfx/04.mp3", Sound.class);
         assetManager.load("sfx/05.mp3", Sound.class);
         assetManager.load("sfx/06.mp3", Sound.class);
+        assetManager.load("sfx/cry.mp3", Sound.class);
+        assetManager.load("sfx/splash.mp3", Sound.class);
+        assetManager.load("sfx/pig.mp3", Sound.class);
         
         assetManager.load("sfx/audio-test.mp3", Music.class);
         assetManager.load("bgm/music-test.mp3", Music.class);
@@ -138,6 +143,7 @@ public class Core extends JamGame {
             
             mudParticleEffect = assetManager.get("particles/mud.p");
             tossParticleEffect = assetManager.get("particles/toss.p");
+            tearParticleEffect = assetManager.get("particles/tears.p");
             
             setScreen(createSplashScreen());
         }));

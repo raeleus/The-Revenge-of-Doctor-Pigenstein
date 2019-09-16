@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,10 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -37,7 +35,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     private Skin skin;
     private Core core;
     private Table root;
-    private final static Color BG_COLOR = new Color(Color.WHITE);
+    private final static Color BG_COLOR = new Color(134 / 255f, 201 / 255f, 224 / 255f, 1f);
     public static GameScreen gameScreen;
     public static float mouseX;
     public static float mouseY;
@@ -283,7 +281,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
         Label label = new Label("Doctor Pigenstein is not being nice!\nHe won't let the other piggies have fun in the mud puddle.\nCan you toss the piggies back in?\nThe bigger the splash, the happier the pig!", skin);
         label.setAlignment(Align.center);
         dialog.text(label);
-        dialog.button("Begin", null);
+        TextButton textButton = new TextButton("Begin", skin);
+        textButton.addListener(core.sndChangeListener);
+        dialog.button(textButton, null);
         dialog.show(stage);
     }
     
@@ -304,8 +304,14 @@ public class GameScreen extends JamScreen implements InputProcessor {
                 "\nThanks for helping the piggy friends!", skin);
         label.setAlignment(Align.center);
         dialog.text(label);
-        dialog.button("Play Again", true);
-        dialog.button("Back to Menu", false);
+    
+        TextButton textButton = new TextButton("Play Again", skin);
+        textButton.addListener(core.sndChangeListener);
+        dialog.button(textButton, true);
+    
+        textButton = new TextButton("Back to Menu", skin);
+        textButton.addListener(core.sndChangeListener);
+        dialog.button(textButton, false);
         dialog.show(stage);
     }
     
@@ -317,6 +323,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
                 doctorEntity.animationState.setAnimation(0, "say_01", false);
                 break;
             case 2:
+                Sound sound = core.assetManager.get("sfx/cry.mp3");
+                sound.play();
+                
                 for (PigEntity pigEntity : pigEntities) {
                     if (!pigEntity.wearingHat) {
                         pigEntity.crying = true;
@@ -328,6 +337,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
                 doctorEntity.animationState.setAnimation(0, "say_02", false);
                 break;
             case 4:
+                sound = core.assetManager.get("sfx/cry.mp3");
+                sound.play();
+                
                 for (PigEntity pigEntity : pigEntities) {
                     if (!pigEntity.wearingMakeup) {
                         pigEntity.crying = true;
@@ -339,6 +351,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
                 doctorEntity.animationState.setAnimation(0, "say_03", false);
                 break;
             case 6:
+                sound = core.assetManager.get("sfx/cry.mp3");
+                sound.play();
+                
                 for (PigEntity pigEntity : pigEntities) {
                     if (!pigEntity.wearingGlasses) {
                         pigEntity.crying = true;
@@ -350,6 +365,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
                 doctorEntity.animationState.setAnimation(0, "say_04", false);
                 break;
             case 8:
+                sound = core.assetManager.get("sfx/cry.mp3");
+                sound.play();
+                
                 for (PigEntity pigEntity : pigEntities) {
                     if (!pigEntity.wearingMustache) {
                         pigEntity.crying = true;
@@ -361,6 +379,9 @@ public class GameScreen extends JamScreen implements InputProcessor {
                 doctorEntity.animationState.setAnimation(0, "say_05", false);
                 break;
             case 10:
+                sound = core.assetManager.get("sfx/cry.mp3");
+                sound.play();
+                
                 for (PigEntity pigEntity : pigEntities) {
                     pigEntity.crying = true;
                     pigEntity.beginWalking();
