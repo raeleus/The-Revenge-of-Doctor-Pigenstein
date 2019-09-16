@@ -60,6 +60,7 @@ public class PigEntity extends Entity {
     @Override
     public void act(float delta) {
         if (y < 376) {
+            float score = getSpeed();
             y = 376;
             gravityY = 0;
             deltaX = 0;
@@ -91,10 +92,12 @@ public class PigEntity extends Entity {
                 crying = false;
                 animationState.setAnimation(0, standAnimation, true);
                 deltaX = 0;
+                gameScreen.addScore((int) (score / 100));
                 
                 ParticleEntity particleEntity = new ParticleEntity(core.mudParticleEffect);
                 particleEntity.setPosition(x, y);
                 particleEntity.depth = GameScreen.MUD_DEPTH;
+                particleEntity.particleEffect.scaleEffect(score / 2000);
                 gameScreen.entityController.add(particleEntity);
             }
         } else if (y > 2290) {

@@ -13,7 +13,7 @@ public class ParticleEntity extends Entity {
     @Override
     public void create() {
         particleEffect.setPosition(x, y);
-        particleEffect.reset();
+        particleEffect.reset(false);
     }
     
     @Override

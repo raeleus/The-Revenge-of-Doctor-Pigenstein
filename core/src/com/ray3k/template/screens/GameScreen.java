@@ -55,6 +55,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     public float pigDeltaY;
     private GestureDetector gestureDetector;
     private Array<PlatformEntity> platforms;
+    public int score;
     
     public GameScreen(Action action) {
         this.action = action;
@@ -86,7 +87,8 @@ public class GameScreen extends JamScreen implements InputProcessor {
         root.setFillParent(true);
         stage.addActor(root);
     
-        Label label = new Label("100", skin, "black");
+        Label label = new Label("0", skin, "black");
+        label.setName("score");
         root.add(label).expandY().top();
         
         showIntroDialog();
@@ -214,6 +216,13 @@ public class GameScreen extends JamScreen implements InputProcessor {
         dialog.text(label);
         dialog.button("Begin", null);
         dialog.show(stage);
+    }
+    
+    public void addScore(int score) {
+        this.score += score;
+        
+        Label label = stage.getRoot().findActor("score");
+        label.setText(this.score);
     }
     
     /**todo: add all the key/button logging to base Jam Screen.**/
