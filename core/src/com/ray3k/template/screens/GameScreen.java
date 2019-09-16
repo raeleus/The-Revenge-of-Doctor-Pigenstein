@@ -115,11 +115,47 @@ public class GameScreen extends JamScreen implements InputProcessor {
         root.setFillParent(true);
         stage.addActor(root);
     
+        Array<PigEntity> pigEntities = new Array<>();
+        
         for (int i = 0; i < 10; i++) {
             PigEntity pigEntity = new PigEntity();
             pigEntity.setPosition(MathUtils.random(1475, 2775), 380);
             entityController.add(pigEntity);
             pigEntity.beginWalking();
+            pigEntities.add(pigEntity);
+            pigEntity.skeleton.setSkin(new com.esotericsoftware.spine.Skin("new-skin" + i));
+        }
+        
+        pigEntities.shuffle();
+        for (int i = 0; i < 2; i++) {
+            com.esotericsoftware.spine.Skin pigSkin = pigEntities.get(i).skeleton.getSkin();
+            pigSkin.addSkin(PigEntity.mustacheSkins.random());
+            pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
+            pigEntities.get(i).skeleton.setSkin(pigSkin);
+        }
+    
+        pigEntities.shuffle();
+        for (int i = 0; i < 4; i++) {
+            com.esotericsoftware.spine.Skin pigSkin = pigEntities.get(i).skeleton.getSkin();
+            pigSkin.addSkin(PigEntity.glassesSkins.random());
+            pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
+            pigEntities.get(i).skeleton.setSkin(pigSkin);
+        }
+    
+        pigEntities.shuffle();
+        for (int i = 0; i < 4; i++) {
+            com.esotericsoftware.spine.Skin pigSkin = pigEntities.get(i).skeleton.getSkin();
+            pigSkin.addSkin(PigEntity.makeupSkins.random());
+            pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
+            pigEntities.get(i).skeleton.setSkin(pigSkin);
+        }
+    
+        pigEntities.shuffle();
+        for (int i = 0; i < 8; i++) {
+            com.esotericsoftware.spine.Skin pigSkin = pigEntities.get(i).skeleton.getSkin();
+            pigSkin.addSkin(PigEntity.hatSkins.random());
+            pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
+            pigEntities.get(i).skeleton.setSkin(pigSkin);
         }
     
         PlatformEntity platformEntity = new PlatformEntity();

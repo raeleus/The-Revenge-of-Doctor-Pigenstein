@@ -1,9 +1,11 @@
 package com.ray3k.template.entities;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.spine.Animation;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.SkeletonData;
+import com.esotericsoftware.spine.Skin;
 import com.ray3k.template.Core;
 import com.ray3k.template.screens.GameScreen;
 
@@ -19,6 +21,29 @@ public class PigEntity extends Entity {
     private static Animation standSideAnimation;
     private static Animation surpriseAnimation;
     private static Animation walkAnimation;
+    public static Skin glassesSkin;
+    public static Skin monocleSkin;
+    public static Skin sunglassesSkin;
+    public static Skin techMonocleSkin;
+    public static Skin farmerHatSkin;
+    public static Skin hatSkin;
+    public static Skin headphonesSkin;
+    public static Skin headsetSkin;
+    public static Skin partyHatSkin;
+    public static Skin pigTailsSkin;
+    public static Skin sunHatSkin;
+    public static Skin topHatSkin;
+    public static Skin camoflageSkin;
+    public static Skin eyeBlackSkin;
+    public static Skin makeupSkin;
+    public static Skin noseRingSkin;
+    public static Skin beardSkin;
+    public static Skin mustacheSkin;
+    public static Skin mustacheCurlySkin;
+    public static Array<Skin> glassesSkins;
+    public static Array<Skin> hatSkins;
+    public static Array<Skin> makeupSkins;
+    public static Array<Skin> mustacheSkins;
     private boolean crying;
     private float runSpeed;
     private ParticleEntity tossParticleEntity;
@@ -40,6 +65,52 @@ public class PigEntity extends Entity {
             standSideAnimation = skeletonData.findAnimation("stand-side");
             surpriseAnimation = skeletonData.findAnimation("surprise");
             walkAnimation = skeletonData.findAnimation("walk");
+            
+            glassesSkins = new Array<>();
+            glassesSkin = skeletonData.findSkin("glasses/glasses");
+            glassesSkins.add(glassesSkin);
+            monocleSkin = skeletonData.findSkin("glasses/monocle");
+            glassesSkins.add(monocleSkin);
+            sunglassesSkin = skeletonData.findSkin("glasses/sunglasses");
+            glassesSkins.add(sunglassesSkin);
+            techMonocleSkin = skeletonData.findSkin("glasses/tech-monocle");
+            glassesSkins.add(techMonocleSkin);
+            
+            hatSkins = new Array<>();
+            farmerHatSkin = skeletonData.findSkin("hat/farmer-hat");
+            hatSkins.add(farmerHatSkin);
+            hatSkin = skeletonData.findSkin("hat/hat");
+            hatSkins.add(hatSkin);
+            headphonesSkin = skeletonData.findSkin("hat/headphones");
+            hatSkins.add(headphonesSkin);
+            headsetSkin = skeletonData.findSkin("hat/headset");
+            hatSkins.add(headsetSkin);
+            partyHatSkin = skeletonData.findSkin("hat/party-hat");
+            hatSkins.add(partyHatSkin);
+            pigTailsSkin = skeletonData.findSkin("hat/pig-tails");
+            hatSkins.add(pigTailsSkin);
+            sunHatSkin = skeletonData.findSkin("hat/sun-hat");
+            hatSkins.add(sunHatSkin);
+            topHatSkin = skeletonData.findSkin("hat/top-hat");
+            hatSkins.add(topHatSkin);
+            
+            makeupSkins = new Array<>();
+            camoflageSkin = skeletonData.findSkin("makeup/camoflage");
+            makeupSkins.add(camoflageSkin);
+            eyeBlackSkin = skeletonData.findSkin("makeup/eye-black");
+            makeupSkins.add(eyeBlackSkin);
+            makeupSkin = skeletonData.findSkin("makeup/makeup");
+            makeupSkins.add(makeupSkin);
+            noseRingSkin = skeletonData.findSkin("makeup/nose-ring");
+            makeupSkins.add(noseRingSkin);
+            
+            mustacheSkins = new Array<>();
+            beardSkin = skeletonData.findSkin("mustache/beard");
+            mustacheSkins.add(beardSkin);
+            mustacheSkin = skeletonData.findSkin("mustache/mustache");
+            mustacheSkins.add(mustacheSkin);
+            mustacheCurlySkin = skeletonData.findSkin("mustache/mustache-curly");
+            mustacheSkins.add(mustacheCurlySkin);
             
             animationStateData.setMix(standAnimation,  walkAnimation, .25f);
         }
