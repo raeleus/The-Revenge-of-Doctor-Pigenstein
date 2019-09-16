@@ -44,6 +44,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     private final static Vector3 tempVector3 = new Vector3();
     private static IntArray keysJustPressed = new IntArray();
     private static IntArray buttonsJustPressed = new IntArray();
+    private static IntArray buttonsPressed = new IntArray();
     public static int PIG_DEPTH = 100;
     public static int BACKGROUND_DEPTH = 10;
     public static int PARTICLE_DEPTH = 101;
@@ -231,6 +232,14 @@ public class GameScreen extends JamScreen implements InputProcessor {
             core.setScreen(new GameScreen(action));
         }
         
+        if (isButtonPressed(-1)) {
+            BG_COLOR.set(Color.RED);
+            Label label = stage.getRoot().findActor("score");
+            label.setText(mouseX + " " + mouseY);
+        } else {
+            BG_COLOR.set(Color.WHITE);
+        }
+        
         keysJustPressed.clear();
         buttonsJustPressed.clear();
     }
@@ -297,11 +306,14 @@ public class GameScreen extends JamScreen implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         buttonsJustPressed.add(button);
+        
+        buttonsPressed.add(button);
         return false;
     }
     
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        buttonsPressed.removeValue(button);
         return false;
     }
     
@@ -339,11 +351,11 @@ public class GameScreen extends JamScreen implements InputProcessor {
     
     public static boolean isButtonPressed(int button) {
         if (button == -1) {
-            return Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)
-                    || Gdx.input.isButtonPressed(Input.Buttons.MIDDLE) || Gdx.input.isButtonPressed(Input.Buttons.BACK)
-                    || Gdx.input.isButtonPressed(Input.Buttons.FORWARD);
+            return buttonsPressed.contains(Input.Buttons.LEFT) || buttonsPressed.contains(Input.Buttons.RIGHT)
+                    || buttonsPressed.contains(Input.Buttons.MIDDLE) || buttonsPressed.contains(Input.Buttons.BACK)
+                    || buttonsPressed.contains(Input.Buttons.FORWARD);
         } else {
-            return Gdx.input.isButtonPressed(button);
+            return buttonsPressed.contains(button);
         }
     }
 }
