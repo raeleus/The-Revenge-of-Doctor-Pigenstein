@@ -58,7 +58,10 @@ public class GameScreen extends JamScreen implements InputProcessor {
     public float pigDeltaY;
     private GestureDetector gestureDetector;
     private Array<PlatformEntity> platforms;
+    private Array<PigEntity> pigEntities;
     public int score;
+    public static int mode;
+    public DoctorEntity doctorEntity;
     
     public GameScreen(Action action) {
         this.action = action;
@@ -66,6 +69,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
     
     @Override
     public void show() {
+        mode = 0;
         gameScreen = this;
         
         keysJustPressed.clear();
@@ -117,13 +121,12 @@ public class GameScreen extends JamScreen implements InputProcessor {
         root.setFillParent(true);
         stage.addActor(root);
     
-        Array<PigEntity> pigEntities = new Array<>();
+        pigEntities = new Array<>();
         
         for (int i = 0; i < 10; i++) {
             PigEntity pigEntity = new PigEntity();
-            pigEntity.setPosition(MathUtils.random(1475, 2775), 380);
+            pigEntity.setPosition(MathUtils.random(1475, 2775), 376);
             entityController.add(pigEntity);
-            pigEntity.beginWalking();
             pigEntities.add(pigEntity);
             pigEntity.skeleton.setSkin(new com.esotericsoftware.spine.Skin("new-skin" + i));
         }
@@ -134,6 +137,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
             pigSkin.addSkin(PigEntity.mustacheSkins.random());
             pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
             pigEntities.get(i).skeleton.setSkin(pigSkin);
+            pigEntities.get(i).wearingMustache = true;
         }
     
         pigEntities.shuffle();
@@ -142,6 +146,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
             pigSkin.addSkin(PigEntity.glassesSkins.random());
             pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
             pigEntities.get(i).skeleton.setSkin(pigSkin);
+            pigEntities.get(i).wearingGlasses = true;
         }
     
         pigEntities.shuffle();
@@ -150,6 +155,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
             pigSkin.addSkin(PigEntity.makeupSkins.random());
             pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
             pigEntities.get(i).skeleton.setSkin(pigSkin);
+            pigEntities.get(i).wearingMakeup = true;
         }
     
         pigEntities.shuffle();
@@ -158,6 +164,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
             pigSkin.addSkin(PigEntity.hatSkins.random());
             pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
             pigEntities.get(i).skeleton.setSkin(pigSkin);
+            pigEntities.get(i).wearingHat = true;
         }
     
         PlatformEntity platformEntity = new PlatformEntity();
@@ -209,7 +216,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
         crateEntity.setPosition(1493, 380);
         entityController.add(crateEntity);
         
-        DoctorEntity doctorEntity = new DoctorEntity();
+        doctorEntity = new DoctorEntity();
         doctorEntity.setPosition(1493, 620);
         entityController.add(doctorEntity);
     }
@@ -226,18 +233,21 @@ public class GameScreen extends JamScreen implements InputProcessor {
             grabbedPig.setPosition(mouseX + grabbedPigOffsetX, mouseY + grabbedPigOffsetY);
         }
         
+        boolean increase = true;
+        if (mode == 2 || mode == 4 || mode == 6 || mode == 8 || mode == 10) {
+            for (PigEntity pigEntity : pigEntities) {
+                if (!pigEntity.destroy && pigEntity.crying) {
+                    increase = false;
+                    break;
+                }
+            }
+            if (increase) increaseMode();
+        }
+        
         stage.act(delta);
         entityController.act(delta);
         if (isKeyJustPressed(Input.Keys.F5)) {
             core.setScreen(new GameScreen(action));
-        }
-        
-        if (isButtonPressed(-1)) {
-            BG_COLOR.set(Color.RED);
-            Label label = stage.getRoot().findActor("score");
-            label.setText(mouseX + " " + mouseY);
-        } else {
-            BG_COLOR.set(Color.WHITE);
         }
         
         keysJustPressed.clear();
@@ -263,13 +273,84 @@ public class GameScreen extends JamScreen implements InputProcessor {
     }
     
     public void showIntroDialog() {
-        Dialog dialog = new Dialog("", skin);
+        Dialog dialog = new Dialog("", skin) {
+            @Override
+            protected void result(Object object) {
+                increaseMode();
+            }
+        };
         dialog.getContentTable().pad(20);
         Label label = new Label("Doctor Pigenstein is not being nice!\nHe won't let the other piggies have fun in the mud puddle.\nCan you toss the piggies back in?\nThe bigger the splash, the happier the pig!", skin);
         label.setAlignment(Align.center);
         dialog.text(label);
         dialog.button("Begin", null);
         dialog.show(stage);
+    }
+    
+    public void increaseMode() {
+        mode++;
+        
+        switch (mode) {
+            case 1:
+                doctorEntity.animationState.setAnimation(0, "say_01", false);
+                break;
+            case 2:
+                for (PigEntity pigEntity : pigEntities) {
+                    if (!pigEntity.wearingHat) {
+                        pigEntity.crying = true;
+                        pigEntity.beginWalking();
+                    }
+                }
+                break;
+            case 3:
+                doctorEntity.animationState.setAnimation(0, "say_02", false);
+                break;
+            case 4:
+                for (PigEntity pigEntity : pigEntities) {
+                    if (!pigEntity.wearingMakeup) {
+                        pigEntity.crying = true;
+                        pigEntity.beginWalking();
+                    }
+                }
+                break;
+            case 5:
+                doctorEntity.animationState.setAnimation(0, "say_03", false);
+                break;
+            case 6:
+                for (PigEntity pigEntity : pigEntities) {
+                    if (!pigEntity.wearingGlasses) {
+                        pigEntity.crying = true;
+                        pigEntity.beginWalking();
+                    }
+                }
+                break;
+            case 7:
+                doctorEntity.animationState.setAnimation(0, "say_04", false);
+                break;
+            case 8:
+                for (PigEntity pigEntity : pigEntities) {
+                    if (!pigEntity.wearingMustache) {
+                        pigEntity.crying = true;
+                        pigEntity.beginWalking();
+                    }
+                }
+                break;
+            case 9:
+                doctorEntity.animationState.setAnimation(0, "say_05", false);
+                break;
+            case 10:
+                for (PigEntity pigEntity : pigEntities) {
+                    pigEntity.crying = true;
+                    pigEntity.beginWalking();
+                }
+                break;
+            case 11:
+                doctorEntity.animationState.setAnimation(0, "say_06", false);
+                break;
+            case 12:
+                //show game end dialog
+                break;
+        }
     }
     
     public void addScore(int score) {

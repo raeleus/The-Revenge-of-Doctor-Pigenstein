@@ -44,9 +44,13 @@ public class PigEntity extends Entity {
     public static Array<Skin> hatSkins;
     public static Array<Skin> makeupSkins;
     public static Array<Skin> mustacheSkins;
-    private boolean crying;
+    public boolean crying;
     private float runSpeed;
     private ParticleEntity tossParticleEntity;
+    public boolean wearingHat;
+    public boolean wearingGlasses;
+    public boolean wearingMustache;
+    public boolean wearingMakeup;
     
     @Override
     public void create() {
@@ -116,10 +120,10 @@ public class PigEntity extends Entity {
         }
         
         setSkeletonData(skeletonData, animationStateData);
-        animationState.setAnimation(0, walkAnimation, true);
+        animationState.setAnimation(0, standAnimation, true);
         animationState.setAnimation(1, smileAnimation, true);
         animationState.addAnimation(2, blinkAnimation, true, MathUtils.random(3f));
-        crying = true;
+        crying = false;
         runSpeed = MathUtils.random(200, 500);
     }
     
@@ -201,17 +205,13 @@ public class PigEntity extends Entity {
     public void beginWalking() {
         if (x < 2070) {
             deltaX = -runSpeed;
-            if (skeleton.getScaleX() != -1) {
-                animationState.setAnimation(0, standAnimation, false);
-                animationState.addAnimation(0, walkAnimation, true, 0);
-            }
+            animationState.setAnimation(0, standAnimation, false);
+            animationState.addAnimation(0, walkAnimation, true, 0);
             skeleton.setScaleX(-1);
         } else {
             deltaX = runSpeed;
-            if (skeleton.getScaleX() != 1) {
-                animationState.setAnimation(0, standAnimation, false);
-                animationState.addAnimation(0, walkAnimation, true, 0);
-            }
+            animationState.setAnimation(0, standAnimation, false);
+            animationState.addAnimation(0, walkAnimation, true, 0);
             skeleton.setScaleX(1);
         }
     }

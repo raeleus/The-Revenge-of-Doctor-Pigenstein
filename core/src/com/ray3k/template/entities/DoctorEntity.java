@@ -1,11 +1,9 @@
 package com.ray3k.template.entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.esotericsoftware.spine.Animation;
-import com.esotericsoftware.spine.AnimationStateData;
-import com.esotericsoftware.spine.SkeletonData;
-import com.esotericsoftware.spine.Skin;
+import com.esotericsoftware.spine.*;
 import com.ray3k.template.screens.GameScreen;
 
 public class DoctorEntity extends Entity {
@@ -43,18 +41,55 @@ public class DoctorEntity extends Entity {
 
             monocleSkin = skeletonData.findSkin("glasses/monocle");
             topHatSkin = skeletonData.findSkin("hat/top-hat");
-            
-            animationStateData.setMix(standAnimation,  walkAnimation, .25f);
         }
         
         setSkeletonData(skeletonData, animationStateData);
-        animationState.setAnimation(0, standAnimation, true);
-        animationState.setAnimation(1, smileAnimation, true);
+        animationState.setAnimation(0, standAnimation, false);
         animationState.addAnimation(2, blinkAnimation, true, MathUtils.random(3f));
         Skin skin = new Skin("doctor-skin");
         skin.addSkin(monocleSkin);
         skin.addSkin(topHatSkin);
         skeleton.setSkin(skin);
+        
+        animationState.addListener(new AnimationState.AnimationStateAdapter() {
+            @Override
+            public void complete(AnimationState.TrackEntry entry) {
+                if (entry.getTrackIndex() == 0 && entry.getAnimation().getName().startsWith("say")) {
+                    gameScreen.increaseMode();
+                    animationState.setAnimation(0, standAnimation, false);
+                }
+            }
+    
+            @Override
+            public void event(AnimationState.TrackEntry entry, Event event) {
+                switch (event.getData().getName()) {
+                    case "01":
+                        Sound sound = core.assetManager.get("sfx/01.mp3");
+                        sound.play();
+                        break;
+                    case "02":
+                        sound = core.assetManager.get("sfx/02.mp3");
+                        sound.play();
+                        break;
+                    case "03":
+                        sound = core.assetManager.get("sfx/03.mp3");
+                        sound.play();
+                        break;
+                    case "04":
+                        sound = core.assetManager.get("sfx/04.mp3");
+                        sound.play();
+                        break;
+                    case "05":
+                        sound = core.assetManager.get("sfx/05.mp3");
+                        sound.play();
+                        break;
+                    case "06":
+                        sound = core.assetManager.get("sfx/06.mp3");
+                        sound.play();
+                        break;
+                }
+            }
+        });
     }
     
     @Override
