@@ -86,6 +86,17 @@ public class PigEntity extends Entity {
                 tossParticleEntity.destroy = true;
                 tossParticleEntity = null;
             }
+            
+            if (x > 1475 && x < 2775) {
+                crying = false;
+                animationState.setAnimation(0, standAnimation, true);
+                deltaX = 0;
+                
+                ParticleEntity particleEntity = new ParticleEntity(core.mudParticleEffect);
+                particleEntity.setPosition(x, y);
+                particleEntity.depth = GameScreen.MUD_DEPTH;
+                gameScreen.entityController.add(particleEntity);
+            }
         } else if (y > 2290) {
             y = 2290;
             deltaY = -Math.abs(deltaY);
@@ -108,6 +119,7 @@ public class PigEntity extends Entity {
                 
                 if (tossParticleEntity == null) {
                     tossParticleEntity = new ParticleEntity(core.tossParticleEffect);
+                    tossParticleEntity.depth = GameScreen.PARTICLE_DEPTH;
                     gameScreen.entityController.add(tossParticleEntity);
                 }
             }

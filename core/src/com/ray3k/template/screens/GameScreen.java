@@ -21,10 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.*;
 import com.ray3k.template.Core;
 import com.ray3k.template.JamScreen;
 import com.ray3k.template.Utils;
@@ -72,7 +69,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
         
         entityController = new EntityController();
         gameCamera = new OrthographicCamera();
-        gameViewport = new ExtendViewport(1024, 576, gameCamera);
+        gameViewport = new FitViewport(1024, 576, gameCamera);
         gameCamera.zoom = 4f;
         gameViewport.update(Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
         gameCamera.position.set(474 * 4.5f, gameViewport.getWorldHeight() * gameCamera.zoom / 2,  0);
@@ -204,6 +201,8 @@ public class GameScreen extends JamScreen implements InputProcessor {
         core.batch.end();
     
         core.batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        stage.getViewport().apply();
+        core.batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
         stage.draw();
     }
     
