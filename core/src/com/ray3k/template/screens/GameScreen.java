@@ -145,7 +145,7 @@ public class GameScreen extends JamScreen implements InputProcessor {
         }
     
         pigEntities.shuffle();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
             com.esotericsoftware.spine.Skin pigSkin = pigEntities.get(i).skeleton.getSkin();
             pigSkin.addSkin(PigEntity.makeupSkins.random());
             pigEntities.get(i).skeleton.setSkin((com.esotericsoftware.spine.Skin) null);
